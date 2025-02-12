@@ -5,7 +5,9 @@ const saltRounds = 10;
 
 const userSignUp = async (req, res) => {
   const newUser = req.body;
-  const newId = users.findLastIndex();
+  const allId = users.map(user => user.id)
+  const newId = users.length > 0 ? Math.max(allId) + 1 : 1;
+  
   const passwordHash = await bcrypt.hash(newUser.password, saltRounds);
   users.push({
     ...newUser,
