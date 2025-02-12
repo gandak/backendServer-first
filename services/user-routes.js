@@ -5,12 +5,12 @@ const saltRounds = 10;
 
 const userSignUp = async (req, res) => {
   const newUser = req.body;
-
+  const newId = users.findLastIndex();
   const passwordHash = await bcrypt.hash(newUser.password, saltRounds);
   users.push({
     ...newUser,
     password: passwordHash,
-    id: users.length,
+    id: newId + 1,
     createdAt: new Date(),
     updatedAt: new Date(),
   });
@@ -69,12 +69,12 @@ const getProfile = (req, res) => {
   res.send(rest);
 };
 
-const deleteProfile = (req, red) => {
-  const { id } = req.body;
-   const foundUser = users.find(
-    (user) => id === user.
-    
-  );
-};
+// const deleteProfile = (req, red) => {
+//   const { id } = req.body;
+//    const foundUser = users.find(
+//     (user) => id === user.
+
+//   );
+// };
 
 module.exports = { checkPassword, userSignUp, editUserInfo, getProfile };
